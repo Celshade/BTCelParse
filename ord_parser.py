@@ -1,4 +1,5 @@
 import json
+from pprint import pprint
 
 import requests
 
@@ -9,7 +10,11 @@ ME_COLLECTION_EP = "https://api-mainnet.magiceden.dev/v2/ord/btc/collections/"
 
 
 def get_activities(wallet=str, headers: dict[str, str] = {}):
-    res = requests.get(ME_ACTIVITY_EP, params={"ownerAddress": wallet})
+    res = requests.get(
+        ME_ACTIVITY_EP,
+        params={"ownerAddress": wallet},
+        headers=headers
+    )
 
     if res.status_code == 200:
         return json.dumps(res.json())
@@ -34,11 +39,17 @@ def get_collection(collection_symbol: str, headers: dict[str, str] = {}):
 
 def main(**kwargs) -> None:
     params = kwargs  # Should be valid query params from ME docs
-    # headers = []
-    # print(get_activities(wallet=input("Enter wallet addr: ")))
-    print(
-        get_collection(
-            collection_symbol=kwargs.get("symbol"),
+    # NOTE: GET collection data
+    # print(
+    #     get_collection(
+    #         collection_symbol=kwargs.get("symbol"),
+    #         headers=kwargs.get("headers", {})
+    #     )
+    # )
+    # NOTE: GET wallet activity
+    pprint(
+        get_activities(
+            wallet=kwargs.get("wallet"),
             headers=kwargs.get("headers", {})
         )
     )
@@ -46,6 +57,7 @@ def main(**kwargs) -> None:
 
 if __name__ == "__main__":
     main(
-        symbol=input("Enter collection symbol: "),
+        # symbol=input("Enter collection symbol: "),
+        wallet=input("Enter wallet addr: "),
         headers={"Authorization": f"Bearer {input('Enter api token: ')}"}
     )
