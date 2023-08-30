@@ -23,6 +23,7 @@ def get_activities(wallet=str, headers: dict[str, str] = {}):
         return res.text
 
 
+# NOTE: Testing
 def get_collection(collection_symbol: str, headers: dict[str, str] = {}):
     res = requests.get(
         f"{ME_COLLECTION_EP}/{collection_symbol}",
@@ -37,6 +38,9 @@ def get_collection(collection_symbol: str, headers: dict[str, str] = {}):
         return res.text
 
 
+# TODO: Create a CLI
+# TODO: Add colors
+# TODO: Add progress bar
 def main(**kwargs) -> None:
     params = kwargs  # Should be valid query params from ME docs
     # NOTE: GET collection data
