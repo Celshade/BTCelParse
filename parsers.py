@@ -59,6 +59,8 @@ class ProfitLossParser():
         sell: bool
         timestamp: any  # do we care?
 
+        # TODO: public method to combo _get_activities() _parse_activities()
+
     def fetch_ordinal_data(ord_id: str) -> dict:
         """
         Return parsed buy/sell data for a single ordinal.
