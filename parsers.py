@@ -13,7 +13,8 @@ class ProfitLossParser():
     def __init__(self, wallet: str) -> None:
         self.wallet = wallet
         self.num_activities: int = 0
-        self.ordinal_data: dict = {}
+        # TODO: annotdate timestamps
+        self.ordinal_data: dict[str, str | int | any] = {}
 
     def _get_activities(
             self,
