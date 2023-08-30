@@ -1,5 +1,8 @@
 # Env
 venv/
 
-# Files
-.hidden/*
+# Python
+__pycache__/
+
+# Local Files
+.hidden/

@@ -1,51 +1,6 @@
-import json
-from pprint import pprint
 from getpass import getpass
-from types import GeneratorType
 
-import requests
-
-
-# TYPES
-HEADER = dict[str, str]
-ACTIVITY = dict[str, str | int]
-
-# PATHS
-ME_BASE_ADDR = "api-mainnet.magiceden.dev/v2/ord"
-ME_ACTIVITY_EP = "https://api-mainnet.magiceden.dev/v2/ord/btc/activities"
-# ME_COLLECTION_EP = "https://api-mainnet.magiceden.dev/v2/ord/btc/collections/"
-
-
-def get_activities(
-        wallet=str,
-        headers: HEADER = {}
-) -> tuple[int, list[ACTIVITY]]:
-    """
-    Return the [number of and] broadcasted activities for the given wallet.
-
-    Only returns `buying_broadcasted` activity - ignoring arbitrary listings
-    and transfers.
-
-    Args:
-        wallet: The wallet activity to parse.
-        headers: Any special headers to include in the requests (default={}).
-    """
-    try:
-        res = requests.get(
-            ME_ACTIVITY_EP,
-            params={"ownerAddress": wallet, "kind": "buying_broadcasted"},
-            headers=headers
-        )
-
-        if res.status_code == 200:
-            # NOTE: >> {"total": int, "activities": list[ACTIVITY]}
-            data = res.json()
-            return data.get("total"), data.get("activities")
-        else:
-            print("Error in request")
-            return res.text
-    except Exception as e:
-        raise e
+from parsers import ProfitLossParser
 
 
 # TODO: Create a CLI
@@ -53,17 +8,10 @@ def get_activities(
 # TODO: Add progress bar
 def main(**kwargs) -> None:
     params = kwargs  # Should be valid query params from ME docs
-    # NOTE: GET collection data
-    # print(
-    #     get_collection(
-    #         collection_symbol=kwargs.get("symbol"),
-    #         headers=kwargs.get("headers", {})
-    #     )
-    # )
-    # NOTE: GET wallet activity
+    # GET wallet activity
 
-    num_activites, activities = get_activities(
-        wallet=kwargs.get("wallet"),
+    parser = ProfitLossParser(wallet=kwargs.get("wallet"))
+    num_activites, activities = parser.get_activities(
         headers=kwargs.get("headers", {})
     )
     print(f"Buy/Sell activity count: {num_activites}")
