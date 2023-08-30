@@ -1,10 +1,16 @@
 import json
 from pprint import pprint
 from getpass import getpass
+from types import GeneratorType
 
 import requests
 
 
+# TYPES
+HEADER = dict[str, str]
+ACTIVITY = dict[str, str | int]
+
+# PATHS
 ME_BASE_ADDR = "api-mainnet.magiceden.dev/v2/ord"
 ME_ACTIVITY_EP = "https://api-mainnet.magiceden.dev/v2/ord/btc/activities"
 ME_COLLECTION_EP = "https://api-mainnet.magiceden.dev/v2/ord/btc/collections/"
@@ -12,8 +18,12 @@ ME_COLLECTION_EP = "https://api-mainnet.magiceden.dev/v2/ord/btc/collections/"
 
 def get_activities(
         wallet=str,
-        headers: dict[str, str] = {}
-) -> dict[str, int | list[dict[str, str | int]]]:
+        headers: HEADER = {}
+) -> tuple[int, GeneratorType[ACTIVITY]]:
+    """
+    Return the total number of and activites for the given wallet.
+    """
+
     res = requests.get(
         ME_ACTIVITY_EP,
         params={"ownerAddress": wallet},
