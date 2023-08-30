@@ -25,7 +25,7 @@ def main(**kwargs) -> None:
 
     if activities:
         print(f"Buy/Sell activity count: {parser.num_activities}")
-        print(activities[0])
+        print(list(activities)[0])
     else:
         print("No activity found")
 

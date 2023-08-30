@@ -1,3 +1,5 @@
+from typing import Generator
+
 import requests
 
 from utils import HEADERS, ACTIVITY, ME_ACTIVITY_EP
@@ -16,7 +18,7 @@ class ProfitLossParser():
     def _get_activities(
             self,
             headers: HEADERS
-    ) -> tuple[int, list[ACTIVITY]]:
+    ) -> Generator[ACTIVITY, None, None]:
         """
         Return the [number of and] broadcasted activities for the given wallet.
 
@@ -41,7 +43,7 @@ class ProfitLossParser():
                 data = res.json()
 
                 self.num_activities = data.get("total")
-                return data.get("activities")
+                return (activity for activity in data.get("activities"))
             else:
                 print("Request error. Try again later.")
                 print("*TIP* Provide an API key from ME to avoid this issue!")
