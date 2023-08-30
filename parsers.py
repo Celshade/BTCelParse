@@ -43,7 +43,8 @@ class ProfitLossParser():
                 self.num_activities = data.get("total")
                 return data.get("activities")
             else:
-                print("Error in request")
+                print("Request error. Try again later.")
+                print("*TIP* Provide an API key from ME to avoid this issue!")
                 return res.text
         except Exception as e:
             raise e
