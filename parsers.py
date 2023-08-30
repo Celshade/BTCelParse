@@ -53,13 +53,28 @@ class ProfitLossParser():
             raise e
 
     def _parse_activities(self, activities: list[ACTIVITY]) -> None:
-        _id: str  # can be input on ordinals.com
-        collection: str
-        buy: bool
-        sell: bool
-        timestamp: any  # do we care?
+        for act in activities:
+            ord_id: str = act["tokenId"]
 
-        # TODO: public method to combo _get_activities() _parse_activities()
+            if not self.ordinal_data.get(ord_id):
+                # Verify buy or sale
+                _type = "buy" if act["oldOwner"] == self.wallet else "sale"
+                # Parse activity data
+                self.ordinal_data[ord_id] = {
+                    "collection": act["collection"]["name"],
+                    "inscription": act["token"]["inscriptionNumber"],
+                    "txn_type": _type,
+                    "purchased": act["createdAt"] if _type == "buy" else None,
+                    "purchase_price": int,  # TODO implement
+                    "sold": act["createdAt"] if _type == "sale" else None,
+                    "sale_price": int,  # TODO implement
+                    "profit": int  # TODO implement
+                }
+            else:
+                # TODO update
+                raise NotImplementedError
+
+    # TODO: public method to combo _get_activities() _parse_activities()
 
     def fetch_ordinal_data(ord_id: str) -> dict:
         """
@@ -75,3 +90,6 @@ class ProfitLossParser():
         Write ordindal buy/sell data to file.
         """
         raise NotImplementedError
+
+
+# TODO: Handle maker/taker fees -> maker = ?% & taker = 2%
