@@ -1,5 +1,6 @@
 import json
 from pprint import pprint
+from getpass import getpass
 
 import requests
 
@@ -51,17 +52,18 @@ def main(**kwargs) -> None:
     #     )
     # )
     # NOTE: GET wallet activity
-    pprint(
-        get_activities(
-            wallet=kwargs.get("wallet"),
-            headers=kwargs.get("headers", {})
-        )
+
+    activity = get_activities(
+        wallet=kwargs.get("wallet"),
+        headers=kwargs.get("headers", {})
     )
+    print(f"Activity objects: {len(activity)}")
+    print(activity[0])
 
 
 if __name__ == "__main__":
     main(
         # symbol=input("Enter collection symbol: "),
         wallet=input("Enter wallet addr: "),
-        headers={"Authorization": f"Bearer {input('Enter api token: ')}"}
+        headers={"Authorization": f"Bearer {getpass('Enter api token: ')}"}
     )
