@@ -1,5 +1,5 @@
 # TYPES
-HEADER = dict[str, str]
+HEADERS = dict[str, str]
 ACTIVITY = dict[str, str | int]
 
 # PATHS

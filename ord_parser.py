@@ -7,20 +7,34 @@ from parsers import ProfitLossParser
 # TODO: Add colors
 # TODO: Add progress bar
 def main(**kwargs) -> None:
-    params = kwargs  # Should be valid query params from ME docs
-    # GET wallet activity
+    """
+    Call the ProfitLossParser() to parse ordinal buys/sells.
 
-    parser = ProfitLossParser(wallet=kwargs.get("wallet"))
-    activities = parser.get_activities(
-        headers=kwargs.get("headers", {})
-    )
-    print(f"Buy/Sell activity count: {parser.num_activities}")
-    print(activities[0])
+    Providing an API key is optional; however, if one is not provided, the
+    requests may fail to return results.
+    """
+    wallet = kwargs.get("wallet")
+
+    # Validate wallet
+    if not wallet:
+        print("No wallet provided")
+
+    # Init parser and get wallet activity
+    parser = ProfitLossParser(wallet=wallet)
+    activities = parser.get_activities(headers=kwargs.get("headers"))
+
+    if activities:
+        print(f"Buy/Sell activity count: {parser.num_activities}")
+        print(activities[0])
+    else:
+        print("No activity found")
 
 
 if __name__ == "__main__":
+    wallet = input("Enter wallet addr: ")
+    api_key = getpass('Enter api token: ')
+
     main(
-        # symbol=input("Enter collection symbol: "),
-        wallet=input("Enter wallet addr: "),
-        headers={"Authorization": f"Bearer {getpass('Enter api token: ')}"}
+        wallet=wallet,
+        headers={"Authorization": f"Bearer {api_key}"} if api_key else {}
     )

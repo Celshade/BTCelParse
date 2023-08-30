@@ -1,6 +1,6 @@
 import requests
 
-from utils import HEADER, ACTIVITY, ME_ACTIVITY_EP
+from utils import HEADERS, ACTIVITY, ME_ACTIVITY_EP
 
 
 class ProfitLossParser():
@@ -15,7 +15,7 @@ class ProfitLossParser():
 
     def get_activities(
             self,
-            headers: HEADER = {}
+            headers: HEADERS
     ) -> tuple[int, list[ACTIVITY]]:
         """
         Return the [number of and] broadcasted activities for the given wallet.
@@ -49,7 +49,12 @@ class ProfitLossParser():
             raise e
 
     def parse_activities(self, activities: list[ACTIVITY]) -> None:
-        pass
+        _id: str  # can be input on ordinals.com
+        collection: str
+        buy: bool
+        sell: bool
+        timestamp: any  # do we care?
+
 
 
 
