@@ -21,7 +21,9 @@ def get_activities(
     )
 
     if res.status_code == 200:
+        # TODO: return a generator and/or do the stuff
         return res.json()  # NOTE: -> {"total": int, "activities": list[dict]}
+        # for activity in res.json().get("activities"):
     else:
         print("Error in request")
         return res.text
