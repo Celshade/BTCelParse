@@ -73,6 +73,3 @@ class ProfitLossParser():
         Write ordindal buy/sell data to file.
         """
         raise NotImplementedError
-
-    # TODO: Write to local file after parse?
-    # TODO: Only configure for ME to start with (other marketplaces?)
