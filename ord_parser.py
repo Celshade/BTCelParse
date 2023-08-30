@@ -13,45 +13,39 @@ ACTIVITY = dict[str, str | int]
 # PATHS
 ME_BASE_ADDR = "api-mainnet.magiceden.dev/v2/ord"
 ME_ACTIVITY_EP = "https://api-mainnet.magiceden.dev/v2/ord/btc/activities"
-ME_COLLECTION_EP = "https://api-mainnet.magiceden.dev/v2/ord/btc/collections/"
+# ME_COLLECTION_EP = "https://api-mainnet.magiceden.dev/v2/ord/btc/collections/"
 
 
 def get_activities(
         wallet=str,
         headers: HEADER = {}
-) -> tuple[int, GeneratorType[ACTIVITY]]:
+) -> tuple[int, list[ACTIVITY]]:
     """
-    Return the total number of and activites for the given wallet.
+    Return the [number of and] broadcasted activities for the given wallet.
+
+    Only returns `buying_broadcasted` activity - ignoring arbitrary listings
+    and transfers.
+
+    Args:
+        wallet: The wallet activity to parse.
+        headers: Any special headers to include in the requests (default={}).
     """
+    try:
+        res = requests.get(
+            ME_ACTIVITY_EP,
+            params={"ownerAddress": wallet, "kind": "buying_broadcasted"},
+            headers=headers
+        )
 
-    res = requests.get(
-        ME_ACTIVITY_EP,
-        params={"ownerAddress": wallet},
-        headers=headers
-    )
-
-    if res.status_code == 200:
-        # TODO: return a generator and/or do the stuff
-        return res.json()  # NOTE: -> {"total": int, "activities": list[dict]}
-        # for activity in res.json().get("activities"):
-    else:
-        print("Error in request")
-        return res.text
-
-
-# NOTE: Testing
-def get_collection(collection_symbol: str, headers: dict[str, str] = {}):
-    res = requests.get(
-        f"{ME_COLLECTION_EP}/{collection_symbol}",
-        params={"symbol": "btck"},
-        headers=headers
-    )
-
-    if res.status_code == 200:
-        return res.json()
-    else:
-        print("Error in request")
-        return res.text
+        if res.status_code == 200:
+            # NOTE: >> {"total": int, "activities": list[ACTIVITY]}
+            data = res.json()
+            return data.get("total"), data.get("activities")
+        else:
+            print("Error in request")
+            return res.text
+    except Exception as e:
+        raise e
 
 
 # TODO: Create a CLI
@@ -68,12 +62,12 @@ def main(**kwargs) -> None:
     # )
     # NOTE: GET wallet activity
 
-    activity = get_activities(
+    num_activites, activities = get_activities(
         wallet=kwargs.get("wallet"),
         headers=kwargs.get("headers", {})
     )
-    print(f"Activity objects: {len(activity)}")
-    print(activity[0])
+    print(f"Buy/Sell activity count: {num_activites}")
+    print(activities[0])
 
 
 if __name__ == "__main__":
