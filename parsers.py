@@ -23,7 +23,7 @@ class ProfitLossParser():
         and transfers.
 
         Args:
-            headers: Any special headers to include in the requests (default={}).
+            headers: Headers to include in the requests (default={}).
         """
         try:
             res = requests.get(

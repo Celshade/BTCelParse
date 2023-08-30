@@ -4,5 +4,8 @@ venv/
 # Python
 __pycache__/
 
+# Editors
+.vscode/
+
 # Local Files
 .hidden/
