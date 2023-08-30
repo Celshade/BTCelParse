@@ -10,7 +10,10 @@ ME_ACTIVITY_EP = "https://api-mainnet.magiceden.dev/v2/ord/btc/activities"
 ME_COLLECTION_EP = "https://api-mainnet.magiceden.dev/v2/ord/btc/collections/"
 
 
-def get_activities(wallet=str, headers: dict[str, str] = {}):
+def get_activities(
+        wallet=str,
+        headers: dict[str, str] = {}
+) -> dict[str, int | list[dict[str, str | int]]]:
     res = requests.get(
         ME_ACTIVITY_EP,
         params={"ownerAddress": wallet},
@@ -18,7 +21,7 @@ def get_activities(wallet=str, headers: dict[str, str] = {}):
     )
 
     if res.status_code == 200:
-        return json.dumps(res.json())
+        return res.json()  # NOTE: -> {"total": int, "activities": list[dict]}
     else:
         print("Error in request")
         return res.text
@@ -33,7 +36,7 @@ def get_collection(collection_symbol: str, headers: dict[str, str] = {}):
     )
 
     if res.status_code == 200:
-        return json.dumps(res.json())
+        return res.json()
     else:
         print("Error in request")
         return res.text
