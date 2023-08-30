@@ -13,7 +13,7 @@ class ProfitLossParser():
         self.num_activities: int = 0
         self.ordinal_data: dict = {}
 
-    def get_activities(
+    def _get_activities(
             self,
             headers: HEADERS
     ) -> tuple[int, list[ACTIVITY]]:
@@ -48,15 +48,27 @@ class ProfitLossParser():
         except Exception as e:
             raise e
 
-    def parse_activities(self, activities: list[ACTIVITY]) -> None:
+    def _parse_activities(self, activities: list[ACTIVITY]) -> None:
         _id: str  # can be input on ordinals.com
         collection: str
         buy: bool
         sell: bool
         timestamp: any  # do we care?
 
+    def fetch_ordinal_data(ord_id: str) -> dict:
+        """
+        Return parsed buy/sell data for a single ordinal.
 
+        Args:
+            ord_id: The ID for the ordinal to fetch data on.
+        """
+        raise NotImplementedError
 
+    def export(self) -> None:
+        """
+        Write ordindal buy/sell data to file.
+        """
+        raise NotImplementedError
 
     # TODO: Write to local file after parse?
     # TODO: Only configure for ME to start with (other marketplaces?)

@@ -21,7 +21,7 @@ def main(**kwargs) -> None:
 
     # Init parser and get wallet activity
     parser = ProfitLossParser(wallet=wallet)
-    activities = parser.get_activities(headers=kwargs.get("headers"))
+    activities = parser._get_activities(headers=kwargs.get("headers"))
 
     if activities:
         print(f"Buy/Sell activity count: {parser.num_activities}")
