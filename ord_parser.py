@@ -11,10 +11,10 @@ def main(**kwargs) -> None:
     # GET wallet activity
 
     parser = ProfitLossParser(wallet=kwargs.get("wallet"))
-    num_activites, activities = parser.get_activities(
+    activities = parser.get_activities(
         headers=kwargs.get("headers", {})
     )
-    print(f"Buy/Sell activity count: {num_activites}")
+    print(f"Buy/Sell activity count: {parser.num_activities}")
     print(activities[0])
 
 

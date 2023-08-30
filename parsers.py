@@ -10,6 +10,7 @@ class ProfitLossParser():
 
     def __init__(self, wallet: str) -> None:
         self.wallet = wallet
+        self.num_activities: int = 0
         self.ordinal_data: dict = {}
 
     def get_activities(
@@ -38,12 +39,19 @@ class ProfitLossParser():
             if res.status_code == 200:
                 # NOTE: >> {"total": int, "activities": list[ACTIVITY]}
                 data = res.json()
-                return data.get("total"), data.get("activities")
+
+                self.num_activities = data.get("total")
+                return data.get("activities")
             else:
                 print("Error in request")
                 return res.text
         except Exception as e:
             raise e
+
+    def parse_activities(self, activities: list[ACTIVITY]) -> None:
+        pass
+
+
 
     # TODO: Write to local file after parse?
     # TODO: Only configure for ME to start with (other marketplaces?)
