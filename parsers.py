@@ -2,7 +2,7 @@ from typing import Generator
 
 import requests
 
-from utils import HEADERS, ACTIVITY, ME_ACTIVITY_EP
+from utils import HEADERS, ACTIVITY, ME_ACTIVITY_EP, to_btc
 
 
 class ProfitLossParser():
@@ -52,6 +52,38 @@ class ProfitLossParser():
         except Exception as e:
             raise e
 
+    def _set_new_data(
+            self,
+            ord_id: str,
+            activity: ACTIVITY,
+            _type: str
+    ) -> None:
+        """
+        Parse initial `ACTIVITY` data for the given ordinal.
+
+        Args:
+            ord_id: The ordinal ID.
+            activity: The `ACTIVITY` to parse.
+            _type: The txn type of `ACTIVITY` ('buy' | 'sale').
+        """
+        # Parse activityivity data
+        self.ordinal_data[ord_id] = {
+            # Ordinal data
+            "collection": activity["collection"]["name"],
+            "inscription": activity["token"]["inscriptionNumber"],
+            "txn_type": _type,
+            # Purchase data
+            "purchased": activity["createdAt"] if _type == "buy" else None,
+            "purchase_price": to_btc(
+                activity["listedPrice"]
+            ) if _type == "buy" else None,
+            # Sale data
+            "sold": activity["createdAt"] if _type == "sale" else None,
+            "sale_price": to_btc(
+                activity["listedPrice"]
+            ) if _type == "sale" else None
+        }
+
     def _parse_activities(self, activities: list[ACTIVITY]) -> None:
         for act in activities:
             ord_id: str = act["tokenId"]
@@ -62,22 +94,19 @@ class ProfitLossParser():
                     assert act["oldOwner"] != act["newOwner"]
                     # Verify buy or sale
                     _type = "buy" if act["oldOwner"] == self.wallet else "sale"
+                    # Parse initial data
+                    self._set_new_data(
+                        ord_id=ord_id,
+                        activity=act,
+                        _type=_type
+                    )
                 except AssertionError:
+                    print("Buyer == Seller ? Ignoring this record.")
                     continue
-
-                # Parse activity data
-                self.ordinal_data[ord_id] = {
-                    "collection": act["collection"]["name"],
-                    "inscription": act["token"]["inscriptionNumber"],
-                    "txn_type": _type,
-                    "purchased": act["createdAt"] if _type == "buy" else None,
-                    "purchase_price": int,  # TODO implement
-                    "sold": act["createdAt"] if _type == "sale" else None,
-                    "sale_price": int,  # TODO implement
-                    "profit": int  # TODO implement
-                }
             else:
                 # TODO update
+
+                "profit": int  # TODO implement
                 raise NotImplementedError
 
     # TODO: public method to combo _get_activities() _parse_activities()
