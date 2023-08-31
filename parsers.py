@@ -2,6 +2,7 @@ from typing import Generator
 
 import requests
 
+from flip import Flip
 from utils import HEADERS, ACTIVITY, ME_ACTIVITY_EP, to_btc
 
 
@@ -13,7 +14,6 @@ class ProfitLossParser():
     def __init__(self, wallet: str) -> None:
         self.wallet = wallet
         self.num_activities: int = 0
-        # TODO: annotdate timestamps
         self.ordinal_data: dict[str, str | int | any] = {}
 
     def _get_activities(
@@ -25,6 +25,10 @@ class ProfitLossParser():
 
         Only returns `buying_broadcasted` activity - ignoring arbitrary listings
         and transfers.
+
+        NOTE: The ME activity endpoint sorts by timestamp
+        descending - this function will return sorted by ascending (oldest
+        first).
 
         Args:
             headers: Headers to include in the requests (default={}).
@@ -44,7 +48,9 @@ class ProfitLossParser():
                 data = res.json()
 
                 self.num_activities = data.get("total")
-                return (activity for activity in data.get("activities"))
+                return (
+                    activity for activity in data.get("activities")[-1::-1]
+                )
             else:
                 print("Request error. Try again later.")
                 print("*TIP* Provide an API key from ME to avoid this issue!")
@@ -72,42 +78,66 @@ class ProfitLossParser():
             "collection": activity["collection"]["name"],
             "inscription": activity["token"]["inscriptionNumber"],
             "txn_type": _type,
-            # Purchase data
-            "purchased": activity["createdAt"] if _type == "buy" else None,
-            "purchase_price": to_btc(
-                activity["listedPrice"]
-            ) if _type == "buy" else None,
-            # Sale data
-            "sold": activity["createdAt"] if _type == "sale" else None,
-            "sale_price": to_btc(
-                activity["listedPrice"]
-            ) if _type == "sale" else None
+            "flip": Flip(
+                purchased=activity["createdAt"] if _type == "buy" else None,
+                purchase_price=to_btc(
+                    activity["listedPrice"]
+                ) if _type == "buy" else None,
+                sold=activity["createdAt"] if _type == "sale" else None,
+                sale_price=to_btc(
+                    activity["listedPrice"]
+                ) if _type == "sale" else None
+            )
         }
 
+    def _update_data(
+            self,
+            flip_data: Flip,
+            activity: ACTIVITY,
+            _type: str
+    ) -> None:
+        """
+        Update existing data for the given `ACTIVITY`.
+
+        Args:
+            flip_data: The `Flip()` object storing buy/sell data.
+            activity: The `ACTIVITY` to parse.
+            _type: The txn type of `ACTIVITY` ('buy' | 'sale').
+        """
+        # Update buy data
+        if _type == "buy":
+            flip_data.purchased = activity["createdAt"]
+            flip_data.purchase_price = activity["listedPrice"]
+        else:  # Update sale data
+            flip_data.sold = activity["createdAt"]
+            flip_data.sale_price = activity["listedPrice"]
+
     def _parse_activities(self, activities: list[ACTIVITY]) -> None:
-        for act in activities:
-            ord_id: str = act["tokenId"]
+        for activity in activities:
+            # Handle edge case where buyer == seller (dafuq)
+            try:
+                assert activity["oldOwner"] != activity["newOwner"]
+            except AssertionError:
+                print("Buyer == Seller ? Ignoring this record.")
+                continue
+
+            # Establish ID and txn type
+            ord_id: str = activity["tokenId"]
+            _type = "buy" if activity["oldOwner"] == self.wallet else "sale"
 
             if not self.ordinal_data.get(ord_id):
-                try:
-                    # Handle edge case where buyer == seller (dafuq yall doing)
-                    assert act["oldOwner"] != act["newOwner"]
-                    # Verify buy or sale
-                    _type = "buy" if act["oldOwner"] == self.wallet else "sale"
-                    # Parse initial data
-                    self._set_new_data(
-                        ord_id=ord_id,
-                        activity=act,
-                        _type=_type
-                    )
-                except AssertionError:
-                    print("Buyer == Seller ? Ignoring this record.")
-                    continue
-            else:
-                # TODO update
-
-                "profit": int  # TODO implement
-                raise NotImplementedError
+                # Parse initial data
+                self._set_new_data(
+                    ord_id=ord_id,
+                    activity=activity,
+                    _type=_type
+                )
+            else:  # Update existing data
+                self._update_data(
+                    data=self.ordinal_data[ord_id]["flip"],
+                    activity=activity,
+                    _type=_type
+                )
 
     # TODO: public method to combo _get_activities() _parse_activities()
 
