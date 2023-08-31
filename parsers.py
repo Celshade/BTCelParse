@@ -57,8 +57,14 @@ class ProfitLossParser():
             ord_id: str = act["tokenId"]
 
             if not self.ordinal_data.get(ord_id):
-                # Verify buy or sale
-                _type = "buy" if act["oldOwner"] == self.wallet else "sale"
+                try:
+                    # Handle edge case where buyer == seller (dafuq yall doing)
+                    assert act["oldOwner"] != act["newOwner"]
+                    # Verify buy or sale
+                    _type = "buy" if act["oldOwner"] == self.wallet else "sale"
+                except AssertionError:
+                    continue
+
                 # Parse activity data
                 self.ordinal_data[ord_id] = {
                     "collection": act["collection"]["name"],
