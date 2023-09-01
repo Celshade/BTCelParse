@@ -30,10 +30,13 @@ def main(**kwargs) -> None:
         print(f"Buy/Sell activity count: {parser.num_activities}")
         # print(list(activities)[0])  # NOTE: TESTING
         parser._parse_activities(activities=activities)
+
         activity_count = 0  # NOTE: TESTING
-        flip_count = 0  # NOTE: TESTING
-        profits = 0  # NOTE: TESTING
-        potential_profits = 0  # NOTE: TESTING
+
+        confirmed_flips = 0
+        confirmed_sales = 0
+        profits = 0
+        potential_profits = 0
 
         for _id in parser.ordinal_data:
             activity_count += 1  # NOTE: TESTING
@@ -45,14 +48,17 @@ def main(**kwargs) -> None:
             flip = ord_data["flip"] if ord_data["flip"].flipped else None
             if flip:
                 print(flip)  # NOTE: TESTING
-                flip_count += 1  # NOTE: TESTING
+                confirmed_flips += 1
+                confirmed_sales += 1
                 profits += flip.profit
             else:  # Calculate sales w/no purchase data
                 if ord_data["flip"].sold:
                     potential_profits += ord_data["flip"].sale_price
-
-        print(f"Total activities parsed: {activity_count}")  # NOTE: TESTING
-        print(f"Total full flips: {flip_count}")  # NOTE: TESTING
+                    confirmed_sales += 1
+        # NOTE: TESTING
+        print(f"Total activities parsed: {activity_count}")
+        print(f"Total confirmed flips: {confirmed_flips}")
+        print(f"Total confirmed sales: {confirmed_sales}")
         print(f"Total confirmed profits: {profits}")
         print(f"Total unconfirmed profits: {potential_profits}")
         print(f"Total potential profits: {profits + potential_profits}")
