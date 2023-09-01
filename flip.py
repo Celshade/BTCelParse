@@ -24,7 +24,7 @@ class Flip():
             (
                 f"Purchased: {self.purchased} ->> {self.purchase_price}",
                 f"Sold: {self.sold} ->> {self.sale_price}",
-                f"Profit: {self.sale_price - self.purchase_price}"
+                f"Profit: {self.profit}"
             )
         )
 

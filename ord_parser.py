@@ -25,7 +25,22 @@ def main(**kwargs) -> None:
 
     if activities:
         print(f"Buy/Sell activity count: {parser.num_activities}")
-        print(list(activities)[0])
+        # print(list(activities)[0])  # NOTE: TESTING
+        parser._parse_activities(activities=activities)
+        activity_count = 0  # NOTE: TESTING
+        flip_count = 0  # NOTE: TESTING
+
+        for _id in parser.ordinal_data:
+            print(_id)
+
+            flip = parser.fetch_ordinal_data(ord_id=_id)
+
+            if flip:
+                print(flip)  # NOTE: TESTING
+                flip_count += 1  # NOTE: TESTING
+            activity_count += 1  # NOTE: TESTING
+        print(f"Total activites parsed: {activity_count}")  # NOTE: TESTING
+        print(f"Total full flips: {flip_count}")  # NOTE: TESTING
     else:
         print("No activity found")
 
