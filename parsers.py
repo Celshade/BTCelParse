@@ -144,14 +144,13 @@ class ProfitLossParser():
 
     # TODO: public method to combo _get_activities() _parse_activities()
 
-    def fetch_ordinal_data(self, ord_id: str) -> dict:
+    def fetch_flip(self, ord_data: str) -> dict:
         """
-        Return parsed buy/sell data for a single ordinal.
+        Return parsed buy/sell data for a single ordinal that was flipped.
 
         Args:
-            ord_id: The ID for the ordinal to fetch data on.
+            ord_data: The parsed ordinal data.
         """
-        ord_data = self.ordinal_data[ord_id]
         return ord_data["flip"] if ord_data["flip"].flipped else None
         # return ord_data["flip"]  # NOTE: TESTING
 
