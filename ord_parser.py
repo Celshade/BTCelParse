@@ -6,6 +6,9 @@ from parsers import ProfitLossParser
 # TODO: Create a CLI
 # TODO: Add colors
 # TODO: Add progress bar
+# TODO: Improve output formatting
+# TODO: Implement export()
+# TODO: Implement json
 def main(**kwargs) -> None:
     """
     Call the ProfitLossParser() to parse ordinal buys/sells.
