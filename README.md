@@ -28,12 +28,14 @@ _Windows OS functionality has not yet been tested prior to release, and addition
 ***
 
 ## Program Configuration
-No additional configuration is needed to run the program as a stand-alone CLI tool.
+No additional configuration is needed to run the program as a stand-alone CLI tool; however, it is **_highly_** recommended that you use an Ordinal API key from MagicEden.
 ***
 
-## Running BTCelParse
-Simply run the program, and [when prompted] input the **ordinal wallet address** that you wish to parse. \
-_You may also provide an [optional] API key from MagicEden if you wish to do so._
+## Running the Program
+Simply run the program, and [when prompted] input the **ordinal wallet address** that you wish to parse.
+
+_You may also provide an [optional] Ordinal API key from MagicEden if you wish to do so._ \
+_If you do not provide an [optional] Ordinal API key from MagicEden, the program may terminate early due to rate-limits_
 
 To call the program, simply navigate to the program's root directory, and call the program.
 
@@ -54,9 +56,11 @@ CLI output has several categories:
 * `Total potential P/L`: Aggregated P/L from all sources
 ***
 
-## Potential Hickups (Rate-Limits)
-_Providing an [optional] API key from MagicEden will bypass their rate-limitations; however, you may run the program without one._
+## Rate-Limits and API Keys
+_Providing an [optional] Ordinal API key from MagicEden will bypass their rate-limitations; however, you may try to run the program without one._
 _The author of original software [Celshade] is not liable for any blocked IP addresses or negative reprecutions resulting from abusing rate-limits._
 
 Some data sources (i.e. marketplaces, mempool, etc) may specify their own rate-limits. \
 The user is responsible for researching and understanding these rate-limits and the consequences for abusing them.
+
+ME Ordinal API Rate Limiting: [-> ME Rate limit docs <-](https://docs.magiceden.io/reference/ordinals-api-keys)
