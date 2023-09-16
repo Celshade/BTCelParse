@@ -45,11 +45,11 @@ i.e.
 
 ## CLI Definitions
 CLI output has several categories:
-* `Total confirmed flips`: Verified purchase/sale prices
+* `Total confirmed flips`: Fully verified purchase/sale
     * Includes mints/purchases via official marketplaces using the same wallet (Xverse support via ME)
 * `Total confirmed buys`: Verified buys
-    * Does not currently include xfers/airdrops/OTC from another source, as these cannot be verified
-        * Multi-wallet support will help address some of this (future release)
+    * Does NOT currently include xfers/airdrops/OTC from another source, as these cannot be fully verified at this time
+        * Multi-wallet support will help address some of this (future release) - namely 3rd party mints
 * `Total confirmed sales`: Verified sales
 * `Total confirmed P/L`: Aggregated P/L from confirmed buys/sells
 * `Total unconfirmed P/L`: Aggregated P/L from confirmed sells and unconfirmed buys
