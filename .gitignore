@@ -1,5 +1,11 @@
 # Env
 venv/
 
-# Files
+# Python
+__pycache__/
 
+# Editors
+.vscode/
+
+# Local Files
+.hidden/
