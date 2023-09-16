@@ -56,9 +56,11 @@ CLI output has several categories:
 * `Total potential P/L`: Aggregated P/L from all sources
 ***
 
-## Potential Hickups (Rate-Limits)
+## Rate-Limits and API Keys
 _Providing an [optional] Ordinal API key from MagicEden will bypass their rate-limitations; however, you may try to run the program without one._
 _The author of original software [Celshade] is not liable for any blocked IP addresses or negative reprecutions resulting from abusing rate-limits._
 
 Some data sources (i.e. marketplaces, mempool, etc) may specify their own rate-limits. \
 The user is responsible for researching and understanding these rate-limits and the consequences for abusing them.
+
+ME Ordinal API Rate Limiting: [-> ME Rate limit docs <-](https://docs.magiceden.io/reference/ordinals-api-keys)
