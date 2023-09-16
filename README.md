@@ -31,10 +31,11 @@ _Windows OS functionality has not yet been tested prior to release, and addition
 No additional configuration is needed to run the program as a stand-alone CLI tool; however, it is **_highly_** recommended that you use an Ordinal API key from MagicEden.
 ***
 
-## Running BTCelParse
+## Running the Program
 Simply run the program, and [when prompted] input the **ordinal wallet address** that you wish to parse. \
 _You may also provide an [optional] Ordinal API key from MagicEden if you wish to do so._
 _If you do not provide Ordinal API key from MagicEden, the program may terminate early due to rate-limits_
+
 To call the program, simply navigate to the program's root directory, and call the program.
 
 i.e.
@@ -55,7 +56,7 @@ CLI output has several categories:
 ***
 
 ## Potential Hickups (Rate-Limits)
-_Providing an [optional] API key from MagicEden will bypass their rate-limitations; however, you may run the program without one._
+_Providing an [optional] Ordinal API key from MagicEden will bypass their rate-limitations; however, you may try to run the program without one._
 _The author of original software [Celshade] is not liable for any blocked IP addresses or negative reprecutions resulting from abusing rate-limits._
 
 Some data sources (i.e. marketplaces, mempool, etc) may specify their own rate-limits. \
