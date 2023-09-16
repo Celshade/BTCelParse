@@ -48,7 +48,10 @@ def main(**kwargs) -> None:
                 count = parser.num_activities
             else:
                 count = parser.num_activities - 1
-            print(f"Buy/Sell activity count: {count}")
+
+            obf_wallet = f"{wallet[:5]}...{wallet[:-5:-1]}"
+            print(f"Parsing addr: {obf_wallet} 🔍")
+            print(f"Buy/Sell activity count: {count}\n")
 
         if activities:
             parser._parse_activities(activities=activities)
@@ -89,8 +92,8 @@ def main(**kwargs) -> None:
 
 
 if __name__ == "__main__":
-    wallet = input("Enter wallet addr: ")
-    api_key = getpass('Enter api token: ')
+    wallet = getpass("Enter wallet addr: ").strip()
+    api_key = getpass('Enter api token: ').strip()
     print("Using API key! 💪\n") if api_key else print()
 
     main(
