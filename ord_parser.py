@@ -31,16 +31,13 @@ def main(**kwargs) -> None:
         # print(list(activities)[0])  # NOTE: TESTING
         parser._parse_activities(activities=activities)
 
-        activity_count = 0  # NOTE: TESTING
-
         confirmed_flips = 0
         confirmed_sales = 0
         profits = 0
         potential_profits = 0
 
         for _id in parser.ordinal_data:
-            activity_count += 1  # NOTE: TESTING
-            print(_id)  # NOTE: TESTING
+            # print(_id)  # NOTE: TESTING
             ord_data = parser.ordinal_data[_id]
 
             # Calculate full flips
@@ -56,12 +53,11 @@ def main(**kwargs) -> None:
                     potential_profits += ord_data["flip"].sale_price
                     confirmed_sales += 1
         # NOTE: TESTING
-        print(f"Total activities parsed: {activity_count}")
         print(f"Total confirmed flips: {confirmed_flips}")
         print(f"Total confirmed sales: {confirmed_sales}")
-        print(f"Total confirmed profits: {profits}")
-        print(f"Total unconfirmed profits: {potential_profits}")
-        print(f"Total potential profits: {profits + potential_profits}")
+        print(f"Total confirmed P/L: {profits}")
+        print(f"Total unconfirmed P/L: {potential_profits}")
+        print(f"Total potential P/L: {profits + potential_profits}")
     else:
         print("No activity found")
 
@@ -69,6 +65,7 @@ def main(**kwargs) -> None:
 if __name__ == "__main__":
     wallet = input("Enter wallet addr: ")
     api_key = getpass('Enter api token: ')
+    print("Using API key! 💪\n") if api_key else print()
 
     main(
         wallet=wallet,

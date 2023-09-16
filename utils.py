@@ -15,7 +15,9 @@ def to_btc(sats: int) -> float:
     """
     Return the given sat value in bitcoin.
 
+    Rounds to 4 decimals (i.e. 0.0001) aka the nearest US dollar.
+
     Args:
         sats: The amount of sats to calculate.
     """
-    return sats / SATS_IN_BTC
+    return round(sats / SATS_IN_BTC, ndigits=4)

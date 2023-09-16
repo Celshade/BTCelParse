@@ -5,11 +5,13 @@ class Flip():
 
     def __init__(
             self,
+            _id: str,
             purchased: str | None = None,
             purchase_price: float | None = None,
             sold: str | None = None,
             sale_price: float | None = None
     ) -> None:
+        self._id = _id
         self.purchased = purchased
         self.purchase_price = purchase_price
         self.sold = sold
@@ -22,9 +24,10 @@ class Flip():
     def __str__(self) -> str:
         return '\n'.join(
             (
-                f"Purchased: {self.purchased} ->> {self.purchase_price}",
-                f"Sold: {self.sold} ->> {self.sale_price}",
-                f"Profit: {self.profit}"
+                f"Ordinal ID: {self._id}",
+                f"Purchased: {self.purchased} for {self.purchase_price}",
+                f"Sold: {self.sold} for {self.sale_price}",
+                f"P/L: {self.profit}\n"
             )
         )
 

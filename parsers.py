@@ -23,8 +23,8 @@ class ProfitLossParser():
         """
         Return the [number of and] broadcasted activities for the given wallet.
 
-        Only returns `buying_broadcasted` activity - ignoring arbitrary listings
-        and transfers.
+        Only returns `buying_broadcasted` and `mint_broadcasted` activity -
+        ignoring arbitrary listings and transfers.
 
         NOTE: The ME activity endpoint sorts by timestamp
         descending - this function will return sorted by ascending (oldest
@@ -72,13 +72,14 @@ class ProfitLossParser():
             activity: The `ACTIVITY` to parse.
             _type: The txn type of `ACTIVITY` ('buy' | 'sale').
         """
-        # Parse activityivity data
+        # Parse activity data
         self.ordinal_data[ord_id] = {
             # Ordinal data
             "collection": activity["collection"]["name"],
             "inscription": activity["token"]["inscriptionNumber"],
             "txn_type": _type,
             "flip": Flip(
+                _id=ord_id,
                 purchased=activity["createdAt"] if _type == "buy" else None,
                 purchase_price=to_btc(
                     activity["listedPrice"]
@@ -159,6 +160,3 @@ class ProfitLossParser():
         Write ordindal buy/sell data to file.
         """
         raise NotImplementedError
-
-
-# TODO: Handle maker/taker fees -> maker = ?% & taker = 2%
