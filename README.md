@@ -13,7 +13,7 @@ This program may be run as a stand-alone CLI tool or integrated into other progr
 
 ***
 
-## System Requirements:
+## System Requirements
 _This program was created on WSL2 and is intended for use with Linux/Unix compatible systems._
 _Windows OS functionality has not yet been tested prior to release, and additional configuration may be necessary._
 
@@ -22,7 +22,7 @@ _Windows OS functionality has not yet been tested prior to release, and addition
     * _This program may work with older versions of python, but this has not been explicitly tested._
         * _Type annotations may break backwards compatibility - modify the program by using the built-in `Typing` module or by removing annotations if using older versions of python._
 
-## Python Requirements:
+## Python Requirements
 1. **requests**: Installable via `pip install requests` [->PYPI docs<-](https://pypi.org/project/requests/)
 
 ***
@@ -41,7 +41,7 @@ i.e.
 
 `python src/ord_parser.py`
 
-**Definitions**
+## CLI Definitions
 CLI output has several categories:
 * `Total confirmed flips`: Verified purchase/sale prices
     * Includes mints/purchases via official marketplaces using the same wallet or Xverse (via ME)
