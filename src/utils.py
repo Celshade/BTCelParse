@@ -4,6 +4,7 @@ ACTIVITY = dict[str, str | int]
 
 # CONSTANTS
 SATS_IN_BTC = 100000000
+OFFSET_INCREMENT = 40  # 40 is the ME limit per request
 
 # PATHS
 ME_BASE_ADDR = "api-mainnet.magiceden.dev/v2/ord"

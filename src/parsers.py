@@ -3,7 +3,7 @@ from typing import Generator, Iterable
 import requests
 
 from flip import Flip
-from utils import HEADERS, ACTIVITY, ME_ACTIVITY_EP, to_btc
+from utils import HEADERS, ACTIVITY, ME_ACTIVITY_EP, OFFSET_INCREMENT, to_btc
 
 
 class ProfitLossParser():
@@ -18,7 +18,8 @@ class ProfitLossParser():
 
     def _get_activities(
             self,
-            headers: HEADERS
+            headers: HEADERS,
+            offset: int
     ) -> Generator[ACTIVITY, None, None]:
         """
         Return the [number of and] broadcasted activities for the given wallet.
@@ -32,13 +33,15 @@ class ProfitLossParser():
 
         Args:
             headers: Headers to include in the requests (default={}).
+            offset: The number of times to offset the request results.
         """
         try:
             res = requests.get(
                 ME_ACTIVITY_EP,
                 params={
                     "ownerAddress": self.wallet,
-                    "kind": ["buying_broadcasted", "mint_broadcasted"]
+                    "kind": ["buying_broadcasted", "mint_broadcasted"],
+                    "offset": offset * OFFSET_INCREMENT if offset else 0
                 },
                 headers=headers
             )
@@ -47,7 +50,7 @@ class ProfitLossParser():
                 # NOTE: >> {"total": int, "activities": list[ACTIVITY]}
                 data = res.json()
 
-                self.num_activities = data.get("total")
+                self.num_activities = int(data.get("total"))
                 return (
                     activity for activity in data.get("activities")[::-1]
                 )
