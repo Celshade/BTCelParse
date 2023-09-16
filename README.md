@@ -33,7 +33,8 @@ No additional configuration is needed to run the program as a stand-alone CLI to
 
 ## Running the Program
 Simply run the program, and [when prompted] input the **ordinal wallet address** that you wish to parse. \
-_You may also provide an [optional] Ordinal API key from MagicEden if you wish to do so._
+
+_You may also provide an [optional] Ordinal API key from MagicEden if you wish to do so._ \
 _If you do not provide Ordinal API key from MagicEden, the program may terminate early due to rate-limits_
 
 To call the program, simply navigate to the program's root directory, and call the program.
