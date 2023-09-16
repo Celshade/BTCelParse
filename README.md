@@ -2,7 +2,10 @@
 [![GNU LGPLv3 license](https://img.shields.io/badge/license-LGPLv3-blue.svg)](https://github.com/Celshade/CelSwap/blob/master/LICENSE.LESSER)
 [![built with Python3](https://img.shields.io/badge/built%20with-Python3-green.svg)](https://www.python.org/)
 
-_A simple P/L parser for Ordinals on Bitcoin_
+_A simple P/L parser for bitcoin ordinals_
+
+BTCelParse is a program designed to help calculate profit/loss for bitcoin ordinals. \
+Data parsed and presented by this program is not guaranteed to be 100% accurate.
 
 This program may be run as a stand-alone CLI tool or integrated into other programs.
 
