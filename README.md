@@ -40,6 +40,18 @@ To call the program, simply navigate to the program's root directory, and call t
 i.e.
 
 `python src/ord_parser.py`
+
+**Definitions**
+CLI output has several categories:
+* `Total confirmed flips`: Verified purchase/sale prices
+    * Includes mints/purchases via official marketplaces using the same wallet or Xverse (via ME)
+* `Total confirmed buys`: Verified buys
+    * Does not currently include xfers/airdrops/OTC from another source, as these cannot be verified
+        * Multi-wallet support will help address some of this (future release)
+* `Total confirmed sales`: Verified sales
+* `Total confirmed P/L`: Aggregated P/L from confirmed buys/sells
+* `Total unconfirmed P/L`: Aggregated P/L from confirmed sells and unconfirmed buys
+* `Total potential P/L`: Aggregated P/L from all sources
 ***
 
 ## Potential Hickups (Rate-Limits)
