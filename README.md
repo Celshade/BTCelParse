@@ -9,7 +9,7 @@ Data parsed and presented by this program is not guaranteed to be 100% accurate.
 
 This program may be run as a stand-alone CLI tool or integrated into other programs.
 
-<gif>
+![](btcelparse_demo.gif)
 
 ***
 
