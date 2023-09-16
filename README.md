@@ -28,7 +28,7 @@ _Windows OS functionality has not yet been tested prior to release, and addition
 No additional configuration is needed to run the program as a stand-alone CLI tool.
 ***
 
-## Running CelSwap
+## Running BTCelParse
 Simply run the program, and [when prompted] input the **ordinal wallet address** that you wish to parse. \
 _You may also provide an [optional] API key from MagicEden if you wish to do so._
 
