@@ -4,7 +4,7 @@
 
 _A simple P/L parser for Ordinals on Bitcoin_
 
-This program may be run as a standalone CLI tool or integrated into other programs. \
+This program may be run as a standalone CLI tool or integrated into other programs.
 
 <gif>
 
@@ -16,8 +16,8 @@ _Windows OS functionality has not yet been tested_
 
 1. **Python [3.11+]**:
     * See docs and install instructions -> [here](https://www.python.org/)
-    _This program may work with older versions of python, but this has not been explicitly tested_
-    _Type annotations may break backwards compatibility - modify by using the build-in `Typing` module or remove them if using older versions of python._
+    * _This program may work with older versions of python, but this has not been explicitly tested._
+        * _Type annotations may break backwards compatibility - modify the program by using the built-in `Typing` module or by removing annotations if using older versions of python._
 
 ## Python Requirements:
 1. **requests**: Installable via `pip install requests` [->PYPI docs<-](https://pypi.org/project/requests/)
@@ -30,19 +30,18 @@ No additional configuration is needed to run the program as a standalone CLI too
 
 ## Running CelSwap
 Simply run the program, and [when prompted] input the **ordinal wallet address** that you wish to parse. \
-You may also provide an [optional] API key from MagicEden if you wish to do so. \
+_You may also provide an [optional] API key from MagicEden if you wish to do so._
 
-To call the program, simply navigate to the program's root directory, and call \
-the program. \
+To call the program, simply navigate to the program's root directory, and call the program.
 
 i.e.
 
 `python src/ord_parser.py`
 ***
 
-## Potential Hickups (aka bundlr)
+## Potential Hickups (Rate-Limits)
 _Providing an [optional] API key from MagicEden will bypass their rate-limitations; however, you may run the program without one._
 _The author of original software [Celshade] is not liable for any blocked IP addresses or negative reprecutions resulting from abusing rate-limits._
 
 Some data sources (i.e. marketplaces, mempool, etc) may specify their own rate-limits. \
-The user is responsible for researching and understanding these rate-limits and the consequences for abusing them. \
+The user is responsible for researching and understanding these rate-limits and the consequences for abusing them.
