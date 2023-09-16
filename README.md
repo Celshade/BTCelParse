@@ -4,6 +4,7 @@
 
 _A simple P/L parser for Ordinals on Bitcoin_
 
+This program may be run as a standalone CLI tool or integrated into other programs. \
 
 <gif>
 
