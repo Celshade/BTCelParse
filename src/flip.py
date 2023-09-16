@@ -28,7 +28,7 @@ class Flip():
         return '\n'.join(
             (
                 f"Flip confirmed!",
-                f"Ordinal ID: {self._id}",
+                f"Ordinal ID: {self._id} ✅",
                 f"Purchased: {self.purchased} for {self.purchase_price}",
                 f"Sold: {self.sold} for {self.sale_price}",
                 f"P/L: {self.profit}\n"
