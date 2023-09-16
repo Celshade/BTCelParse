@@ -4,7 +4,7 @@
 
 _A simple P/L parser for Ordinals on Bitcoin_
 
-This program may be run as a standalone CLI tool or integrated into other programs.
+This program may be run as a stand-alone CLI tool or integrated into other programs.
 
 <gif>
 
@@ -12,7 +12,7 @@ This program may be run as a standalone CLI tool or integrated into other progra
 
 ## System Requirements:
 _This program was created on WSL2 and is intended for use with Linux/Unix compatible systems._
-_Windows OS functionality has not yet been tested_
+_Windows OS functionality has not yet been tested prior to release, and additional configuration may be necessary._
 
 1. **Python [3.11+]**:
     * See docs and install instructions -> [here](https://www.python.org/)
@@ -25,7 +25,7 @@ _Windows OS functionality has not yet been tested_
 ***
 
 ## Program Configuration
-No additional configuration is needed to run the program as a standalone CLI tool.
+No additional configuration is needed to run the program as a stand-alone CLI tool.
 ***
 
 ## Running CelSwap
