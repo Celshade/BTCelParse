@@ -87,8 +87,6 @@ def main(**kwargs) -> None:
     print(
         f"Total potential P/L: {clean_price(profits + potential_profits)}"
     )
-# else:
-#     print("No activity found")
 
 
 if __name__ == "__main__":

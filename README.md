@@ -28,7 +28,7 @@ _Windows OS functionality has not yet been tested prior to release, and addition
 ***
 
 ## Program Configuration
-No additional configuration is needed to run the program as a stand-alone CLI tool.
+No additional configuration is needed to run the program as a stand-alone CLI tool; however, it is **_highly_** recommended that you use an Ordinal API key from MagicEden.
 ***
 
 ## Running BTCelParse

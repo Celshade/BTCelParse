@@ -54,10 +54,11 @@ class ProfitLossParser():
                 return (
                     activity for activity in data.get("activities")[::-1]
                 )
-            else:
-                print("Request error. Try again later.")
+            elif res.status_code == 429:
                 print("*TIP* Provide an API key from ME to avoid this issue!")
                 return res.text
+            else:
+                print("Request error. Try again later.")
         except Exception as e:
             raise e
 
