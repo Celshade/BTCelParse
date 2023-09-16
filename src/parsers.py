@@ -56,7 +56,9 @@ class ProfitLossParser():
                 )
             elif res.status_code == 429:
                 print("*TIP* Provide an API key from ME to avoid this issue!")
-                return res.text
+                raise requests.exceptions.HTTPError(
+                    "HTTPError: 429 Client Error: Too many requests for url"
+                )
             else:
                 print("Request error. Try again later.")
         except Exception as e:
