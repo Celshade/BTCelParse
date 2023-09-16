@@ -1,6 +1,7 @@
 from getpass import getpass
 
 from parsers import ProfitLossParser
+from utils import clean_price
 
 
 # TODO: Create a CLI
@@ -55,9 +56,11 @@ def main(**kwargs) -> None:
         # NOTE: TESTING
         print(f"Total confirmed flips: {confirmed_flips}")
         print(f"Total confirmed sales: {confirmed_sales}")
-        print(f"Total confirmed P/L: {profits}")
-        print(f"Total unconfirmed P/L: {potential_profits}")
-        print(f"Total potential P/L: {profits + potential_profits}")
+        print(f"Total confirmed P/L: {clean_price(profits)}")
+        print(f"Total unconfirmed P/L: {clean_price(potential_profits)}")
+        print(
+            f"Total potential P/L: {clean_price(profits + potential_profits)}"
+        )
     else:
         print("No activity found")
 

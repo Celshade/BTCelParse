@@ -1,3 +1,6 @@
+from utils import clean_price
+
+
 class Flip():
     """
     TODO: Add docs.
@@ -40,4 +43,6 @@ class Flip():
         """
         Return the profit from the Flip().
         """
-        return self.sale_price - self.purchase_price if self.flipped else None
+        return clean_price(
+            price=self.sale_price - self.purchase_price
+        ) if self.flipped else None
