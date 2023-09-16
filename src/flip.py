@@ -27,6 +27,7 @@ class Flip():
     def __str__(self) -> str:
         return '\n'.join(
             (
+                f"Flip confirmed!",
                 f"Ordinal ID: {self._id}",
                 f"Purchased: {self.purchased} for {self.purchase_price}",
                 f"Sold: {self.sold} for {self.sale_price}",
