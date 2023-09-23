@@ -91,7 +91,7 @@ def main(**kwargs) -> None:
 
 if __name__ == "__main__":
     wallet = getpass("Enter wallet addr: ").strip()
-    api_key = getpass('Enter api token: ').strip()
+    api_key = getpass('Enter api key: ').strip()
     print("Using API key! 💪\n") if api_key else print()
 
     main(

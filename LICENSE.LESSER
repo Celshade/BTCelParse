@@ -1,5 +1,6 @@
  BTCelParse is a program designed to help calculate profit/loss for bitcoin ordinals.
- Data parsed and presented by this program is not guaranteed to be 100% accurate.
+ This program was created for research purposes only, and data parsed/presented by this
+ program is not guaranteed to be 100% accurate.
  
  Copyright (C) 2023 [DC] Celshade <ggcelshade@gmail.com>
 
