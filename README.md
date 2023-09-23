@@ -5,9 +5,10 @@
 _A simple P/L parser for bitcoin ordinals_
 
 BTCelParse is a program designed to help calculate profit/loss for bitcoin ordinals. \
-Data parsed and presented by this program is not guaranteed to be 100% accurate.
+This program was created for research purposes only, and data parsed/presented by this \
+program is not guaranteed to be 100% accurate.
 
-This program may be run as a stand-alone CLI tool or integrated into other programs.
+This software may be run as a stand-alone CLI tool or integrated into other programs.
 
 ![](btcelparse_demo.gif)
 
